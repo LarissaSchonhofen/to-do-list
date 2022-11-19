@@ -62,6 +62,7 @@ body {
    display: flex;
    justify-content: space-between;
    align-items: center;
+   margin-top: 20px;
 }
 
 .btnAcao {
@@ -73,6 +74,7 @@ body {
     cursor: pointer;
     background: #2b2a2a;
     color: #fff;
+    outline: none;
 }
 
 .btnAcao:hover {
