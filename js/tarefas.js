@@ -6,15 +6,15 @@ let janelaEdicaoFundo = document.querySelector('#janelaEdicaoFundo');
 let janelaEdicaoBtnFechar = document.querySelector('#janelaEdicaoBtnFechar');
 let btnAtualizarTarefa = document.querySelector('#btnAtualizarTarefa');
 let idTarefaEdicao = document.querySelector('#idTarefaEdicao');
-let imputTarefaNomeEdicao = document.querySelector('#inputTarefaNomeEdicao');
-
+let inputTarefaNomeEdicao = document.querySelector('#inputTarefaNomeEdicao');
+const qtdIdsDisponiveis = Number.MAX_VALUE;
 
 inputNovaTarefa.addEventListener('keypress', (e) => {
 
     if(e.keyCode == 13) {
         let tarefa = {
             nome: inputNovaTarefa.value,
-            id: gerarId()
+            id: gerarIdV2(),
         }
         adicionarTarefa(tarefa);
     }
@@ -25,15 +25,17 @@ janelaEdicaoBtnFechar.addEventListener('click', (e) => {
 });
 
 btnAddTarefa.addEventListener('click', (e) => {
+
     let tarefa = {
         nome: inputNovaTarefa.value,
-        id: gerarId(),
+        id: gerarIdV2(),
     }
     adicionarTarefa(tarefa);
 });
 
 btnAtualizarTarefa.addEventListener('click', (e) => {
     e.preventDefault();
+
     let idTarefa = idTarefaEdicao.innerHTML.replace('#', '');
 
     let tarefa = {
@@ -45,24 +47,56 @@ btnAtualizarTarefa.addEventListener('click', (e) => {
 
     if(tarefaAtual) {
         let li = criarTagLI(tarefa);
-    listaTarefas.replaceChild(li, tarefaAtual);
-    alternarJanelaEdicao();
+        listaTarefas.replaceChild(li, tarefaAtual);
+        alternarJanelaEdicao();
     } else {
         alert('Elemento HTML não encontrado!');
-    }
+    } 
 });
 
 function gerarId() {
-    return Math.floor(Math.random() * 3000);
+    return Math.floor(Math.random() * qtdIdsDisponiveis);
+}
+
+function gerarIdV2() {
+    return gerarIdUnico();
+}
+
+function gerarIdUnico() {
+
+    // debugger;
+    let itensDaLista = document.querySelector('#listaTarefas').children;
+    let idsGerados = [];
+
+    for(let i=0;i<itensDaLista.length;i++) {
+        idsGerados.push(itensDaLista[i].id);
+    }
+
+    let contadorIds = 0;
+    let id = gerarId();
+
+    while(contadorIds <= qtdIdsDisponiveis && 
+        idsGerados.indexOf(id.toString()) > -1) {
+            id = gerarId();
+            contadorIds++;
+
+            if(contadorIds >= qtdIdsDisponiveis) {
+                alert("Oops, ficamos sem IDS :/");
+                throw new Error("Acabou os IDs :/");
+            }
+        }
+
+    return id;
 }
 
 function adicionarTarefa(tarefa) {
     let li = criarTagLI(tarefa);
-    listaTarefas.appenchChild(li);
-    inputNovaTarefa.value = '';
+    listaTarefas.appendChild(li);  
+    inputNovaTarefa.value = '';  
 }
 
 function criarTagLI(tarefa) {
+
     let li = document.createElement('li');
     li.id = tarefa.id;
 
@@ -70,15 +104,15 @@ function criarTagLI(tarefa) {
     span.classList.add('textoTarefa');
     span.innerHTML = tarefa.nome;
 
-    let div = document.createElement('div');
+    let div  = document.createElement('div');
 
     let btnEditar = document.createElement('button');
     btnEditar.classList.add('btnAcao');
     btnEditar.innerHTML = '<i class="fa fa-pencil"></i>';
     btnEditar.setAttribute('onclick', 'editar('+tarefa.id+')');
-
-    let btnExcluir = document.createElement('button');
-    btnEcluir.classList.add('btnAcao');
+    
+    let btnExcluir  = document.createElement('button');
+    btnExcluir.classList.add('btnAcao');
     btnExcluir.innerHTML = '<i class="fa fa-trash"></i>';
     btnExcluir.setAttribute('onclick', 'excluir('+tarefa.id+')');
 
@@ -91,7 +125,7 @@ function criarTagLI(tarefa) {
 }
 
 function editar(idTarefa) {
-    let li = document.getElementById('' + idTarefa + '');
+    let li = document.getElementById(''+ idTarefa + '');
     if(li) {
         idTarefaEdicao.innerHTML = '#' + idTarefa;
         inputTarefaNomeEdicao.value = li.innerText;
@@ -102,9 +136,9 @@ function editar(idTarefa) {
 }
 
 function excluir(idTarefa) {
-    let confirmacao = window.confirm('Tem certeza que deseja excluir?');
+    let confirmacao = window.confirm('Tem certeza que deseja excluir? ');
     if(confirmacao) {
-        let li = document.getElementById('' + idTarefa + '');
+        let li = document.getElementById(''+ idTarefa + '');
         if(li) {
             listaTarefas.removeChild(li);
         } else {
@@ -117,4 +151,3 @@ function alternarJanelaEdicao() {
     janelaEdicao.classList.toggle('abrir');
     janelaEdicaoFundo.classList.toggle('abrir');
 }
-
