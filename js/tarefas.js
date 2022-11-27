@@ -127,7 +127,6 @@ function criarTagLI(tarefa) {
 function editar(idTarefa) {
     let li = document.getElementById(''+ idTarefa + '');
     if(li) {
-        idTarefaEdicao.innerHTML = '#' + idTarefa;
         inputTarefaNomeEdicao.value = li.innerText;
         alternarJanelaEdicao();
     } else {
@@ -136,14 +135,9 @@ function editar(idTarefa) {
 }
 
 function excluir(idTarefa) {
-    let confirmacao = window.confirm('Tem certeza que deseja excluir? ');
-    if(confirmacao) {
         let li = document.getElementById(''+ idTarefa + '');
         if(li) {
             listaTarefas.removeChild(li);
-        } else {
-            alert('Elemento HTML não encontrado!');
-        }
     }
 }
 

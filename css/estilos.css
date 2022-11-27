@@ -6,11 +6,11 @@ body {
     background-image: url("../img/bg.jpg");
     background-position: center;
     background-size: cover;
-    background-position-x: 0px;
-    background-position-y: 0px;;
+    background-position-x: 0;
+    background-position-y: 0;
     background-repeat: space;
-    background-attachment: scroll;
     background-clip: border-box;
+    background-attachment: fixed;
     color: #fff;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -23,7 +23,7 @@ body {
     max-width: 450px;
     margin-top: 50px;
     margin-bottom: 50px;
-    background: #2b2a2a; 
+    background: #363636; 
     padding: 55px;
     border-radius: 12px;
 }
@@ -32,7 +32,6 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 35px;
-
 }
 
 .topo input {
@@ -46,18 +45,24 @@ body {
     color: #fff;
 }
 
+.topo input:hover {
+    transform: scale(1.05);
+}
+
+
 .topo button {
     width: 45px;
     border-radius: 12px;
     border: 1px solid #191818;
     background: #191818;
-    color: #fff;
+    color: #FFF;
     outline: none;
 }
 
 .topo button:hover {
     background: #1f1e1e;
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 #listaTarefas {
@@ -76,6 +81,10 @@ body {
    margin-top: 20px;
 }
 
+li:hover {
+    transform: scale(1.05);
+}
+
 .btnAcao {
     border-radius: 20px;
     border: 1px solid #191818;
@@ -90,6 +99,7 @@ body {
 
 .btnAcao:hover {
     background: #3c3a3a;
+    transform: scale(1.1);
 }
 
 .textoTarefa {
