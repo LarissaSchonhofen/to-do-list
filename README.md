@@ -1,4 +1,4 @@
-# TO DO LIST<h1 aligh="center"></h1>
+# To Do List<h1 aligh="center"></h1>
 
 <p aligh="center">
 🚀 Código que tirei como base alguns exemplos que vi na internet, editei e personalizei conforme o modo como acho mais prático para utilizar um To Do List.
