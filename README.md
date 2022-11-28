@@ -1,4 +1,4 @@
-# to-do-list<h1 aligh="center">NLW 10 Copa</h1>
+# to-do-list<h1 aligh="center">To Do List</h1>
 
 <p aligh="center">
 🚀 Código que tirei como base alguns exemplos que vi na internet, editei e personalizei conforme o modo como acho mais prático para utilizar um To Do List.
